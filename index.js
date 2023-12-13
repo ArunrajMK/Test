@@ -3,7 +3,9 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const {connection} = require('./config/db');
 const {userModel} = require("./module/user.model");
-const PORT = process.env.PORT
+require("dotenv").config()
+
+const PORT = process.env.PORT||8080
 
 app.use(express.json());
 
