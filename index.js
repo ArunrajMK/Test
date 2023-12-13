@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const {connection} = require('./config/db');
 const {userModel} = require("./module/user.model");
-
+const PORT = process.env.atlus_URL
 
 app.use(express.json());
 
@@ -47,7 +47,7 @@ app.post("/signin", async (req, res) => {
 
 
 
-app.listen(8080,async()=>{
+app.listen(PORT,async()=>{
 console.log("Listining to port 8080")
 
 try{
