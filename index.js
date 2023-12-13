@@ -50,7 +50,7 @@ app.post("/signin", async (req, res) => {
 
 
 app.listen(PORT,async()=>{
-console.log("Listining to Mogodb")
+console.log("Listining to port 8080")
 
 try{
     await connection
