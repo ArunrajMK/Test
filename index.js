@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const {connection} = require('./config/db');
 const {userModel} = require("./module/user.model");
-const PORT = process.env.atlus_URL
+const PORT = process.env.PORT
 
 app.use(express.json());
 
@@ -48,7 +48,7 @@ app.post("/signin", async (req, res) => {
 
 
 app.listen(PORT,async()=>{
-console.log("Listining to port 8080")
+console.log("Listining to Mogodb")
 
 try{
     await connection
