@@ -1,14 +1,17 @@
 
 
 const { Router } = require("express");
-const authSignUpController = Router();
-const {userModel} = require("./module/user.model");
+const router = Router();
+const {userModel} = require("../module/user.model");
 
-authSignUpController.post("/signup", async(req, res)=>{
+router.post("/", async(req, res)=>{
     const {email, password} = req.body
     const result = await userModel.findOne({email})
     if(result){
-        res.send("Email already exist")
+        res.send({
+            success:false,
+            message:'Email already exist'
+        })
     }else{
         const new_user = new userModel({
             email:email,
@@ -22,4 +25,5 @@ authSignUpController.post("/signup", async(req, res)=>{
     }
 })
 
-module.exports = authSignUpController;
+
+module.exports = router;

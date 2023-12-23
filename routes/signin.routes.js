@@ -1,19 +1,19 @@
 
 
 const { Router } = require("express");
-const authSignInController = Router();
+const router = Router();
 
 // const express = require('express');
 const jwt = require('jsonwebtoken');
 // const app = express();
-const {userModel} = require("./module/user.model");
+const {userModel} = require("../module/user.model");
 
 
 
 
 
 
-authSignInController.post("/signin", async (req, res) => {
+router.post("/", async (req, res) => {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email, password });
     if (user) {
@@ -26,4 +26,4 @@ authSignInController.post("/signin", async (req, res) => {
 });
 
 
-module.exports = authSignInController;
+module.exports = router;
