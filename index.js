@@ -1,18 +1,21 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 const app = express();
 const {connection} = require('./config/db');
 const {userModel} = require("./module/user.model");
+const {dataModal} = require("./module/data.model");
 require("dotenv").config()
 
 const PORT = process.env.PORT||8080
-
+app.use(cors());
 app.use(express.json());
 
 
 app.get("/", (req, res)=>{
     res.send("Reached Home route")
 })
+
 
 app.post("/signup", async(req, res)=>{
     const {email, password} = req.body
@@ -45,6 +48,42 @@ app.post("/signin", async (req, res) => {
         res.status(401).json({ message: 'Login failed' });
     }
 });
+
+
+
+
+
+app.post("/home", async(req, res)=>{
+    const {name, age} = req.body 
+    
+    const new_user = new dataModal({
+        name:name,
+        age:age
+    })
+
+    const result = await dataModal.findOne({name})
+    if(result){
+        res.send("Name already exist")
+    }else{
+        await new_user.save()
+        res.send({
+        success:true,
+        message:'Success'
+    })}
+    })
+
+
+    app.get("/home", async(req, res)=>{
+       
+
+        const data = await dataModal.find()
+          
+        res.send(data)
+        })
+
+
+
+
 
 
 
