@@ -1,23 +1,23 @@
 const { Router } = require("express");
-const {departmentModel} = require("../module/department.model");
+const {assetModel} = require("../module/asset.model");
 const router = Router();
 
 router.post("/", async(req, res)=>{
-    const {description, department, incharge} = req.body 
-    const new_department = new departmentModel({
+    const {asset_name, brand, service, department} = req.body 
+    const new_asset = new assetModel({
         department:department,
-        incharge:incharge,
-        description:description
-
+        asset_name:asset_name,
+        brand:brand,
+        service:service
     })
-    const result = await departmentModel.findOne({department})
+    const result = await assetModel.findOne({asset_name})
     if(result){
         res.send({
             success:false,
-            message:'Department already exist'
+            message:'Asset already exist'
         })
     }else{
-        await new_department.save()
+        await new_asset.save()
         res.send({
         success:true,
         message:'Success'
@@ -25,26 +25,25 @@ router.post("/", async(req, res)=>{
 })
 
 router.get("/", async (req, res) => {
-    const data = await departmentModel.find();
+    const data = await assetModel.find();
     res.send(data);
 });
 
 
 router.delete("/:id", async (req, res) => {
-    const departmentId = req.params.id;
-
+    const assetId = req.params.id;
     try {
-        const result = await departmentModel.findByIdAndDelete(departmentId);
+        const result = await assetModel.findByIdAndDelete(assetId);
 
         if (!result) {
             res.status(404).send({
                 success: false,
-                message: 'Department not found'
+                message: 'Asset not found'
             });
         } else {
             res.send({
                 success: true,
-                message: 'Department deleted successfully'
+                message: 'Asset deleted successfully'
             });
         }
     } catch (error) {

@@ -1,11 +1,12 @@
 
 const mongoose = require('mongoose');
-const { serviceSchema } = require('./service.model'); 
+const { serviceModel } = require('./service.model'); 
 
 const assetSchema = new mongoose.Schema({
-    asset_id: { type: String, require: true },
+    asset_name: { type: String, require: true },
+    brand: { type: String, require: true },
     department: { type: String, require: true },
-    services: [serviceSchema]
+    service: [serviceModel.schema]
 });
 
 const assetModel = mongoose.model("assetData", assetSchema);
