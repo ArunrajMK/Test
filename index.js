@@ -8,6 +8,7 @@ const {dataModal} = require("./module/data.model");
 const signinRoutes = require('./routes/signin.routes');
 const signupRoutes = require('./routes/signup.routes');
 const homeRoutes = require('./routes/home.routes');
+const departmentRoutes = require('./routes/department.routes');
 require("dotenv").config()
 
 const PORT = process.env.PORT||8080
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/signup", signupRoutes);
 app.use("/signin", signinRoutes);
+app.use("/department", departmentRoutes);
 app.use("/", homeRoutes);
 
 app.listen(PORT,async()=>{

@@ -5,7 +5,7 @@ const router = Router();
 const {userModel} = require("../module/user.model");
 
 router.post("/", async(req, res)=>{
-    const {email, password} = req.body
+    const {email, password, mobile, hospital_name, name} = req.body
     const result = await userModel.findOne({email})
     if(result){
         res.send({
@@ -15,7 +15,10 @@ router.post("/", async(req, res)=>{
     }else{
         const new_user = new userModel({
             email:email,
-            password:password
+            password:password,
+            name:name,
+            hospital_name:hospital_name,
+            mobile:mobile
         })
         await new_user.save()
         res.send({
