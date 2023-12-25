@@ -10,6 +10,7 @@ const signupRoutes = require('./routes/signup.routes');
 const homeRoutes = require('./routes/home.routes');
 const departmentRoutes = require('./routes/department.routes');
 const assetRoutes = require('./routes/asset.routes');
+const serviceRoutes = require('./routes/service.routes');
 require("dotenv").config()
 
 const PORT = process.env.PORT||8080
@@ -20,6 +21,7 @@ app.use("/signup", signupRoutes);
 app.use("/signin", signinRoutes);
 app.use("/department", departmentRoutes);
 app.use("/asset", assetRoutes);
+app.use("/service", serviceRoutes);
 app.use("/", homeRoutes);
 
 app.listen(PORT,async()=>{
