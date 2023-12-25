@@ -46,4 +46,38 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
+
+router.patch("/:id", async (req, res) => {
+    const serviceId = req.params.id;
+    try {
+        const existingService = await serviceModel.findById(serviceId);
+
+        if (!existingService) {
+            return res.status(404).send({
+                success: false,
+                message: 'Service not found'
+            });
+        }
+
+        const { description, status, issue } = req.body;
+        existingService.description = description;
+        existingService.status = status;
+        existingService.issue = issue;
+
+        await existingService.save();
+
+        res.send({
+            success: true,
+            message: 'Service updated successfully'
+        });
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: 'Internal Server Error'
+        });
+    }
+});
+
+
+
 module.exports = router;
