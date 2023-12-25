@@ -3,11 +3,12 @@ const {serviceModel} = require("../module/service.model");
 const router = Router();
 
 router.post("/", async(req, res)=>{
-    const {description, status, issue} = req.body 
+    const {description, status, issue, assetId} = req.body 
     const new_service = new serviceModel({
         description:description,
         status:status,
-        issue:issue
+        issue:issue,
+        assetId:assetId
     })
         await new_service.save()
         res.send({
