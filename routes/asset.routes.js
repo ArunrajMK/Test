@@ -30,6 +30,31 @@ router.get("/", async (req, res) => {
 });
 
 
+router.get("/:id", async (req, res) => {
+    const assetId = req.params.id;
+    try{
+        const result = await assetModel.findById(assetId);
+        if (!result) {
+            res.status(404).send({
+                success: false,
+                message: 'Asset not found'
+            });
+        } else {
+            res.send(result);
+        }
+        
+    }catch(error) {
+        res.status(500).send({
+            success: false,
+            message: 'Internal Server Error'
+        });
+    }
+    
+});
+
+
+
+
 router.delete("/:id", async (req, res) => {
     const assetId = req.params.id;
     try {
