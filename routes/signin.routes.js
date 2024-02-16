@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
     if (user) {
         const secretKey = 'your-secret-key'; 
         const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' }); 
-        res.json({ message: 'Login Success', token, name:user.name, hospital_name:user.hospital_name, mobile:user.mobile, email:user.email });
+        res.json({ message: 'Login Success', token, name:user.name, firm_name:user.firm_name, mobile:user.mobile, email:user.email });
     } else {
         res.status(401).json({ message: 'Login failed' });
     }
