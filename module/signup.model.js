@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     password:{type:String,require:true},
     name:{type:String,require:true},
     mobile:{type:String,require:true},
-    hospital_name:{type:String,require:true}
+    firm_name:{type:String,require:true}
 })
 
 const userModel = mongoose.model("z", userSchema)
