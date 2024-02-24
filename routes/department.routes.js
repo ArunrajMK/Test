@@ -10,11 +10,6 @@ router.post("/", async (req, res) => {
     employee_count,
     resque_vehicle,
     timings,
-    aadhar_image_url,
-    aadhar_image_id,
-    licence_number,
-    licence_image_url,
-    licence_image_id,
     depart_id,
     name,
     email,
@@ -81,8 +76,7 @@ router.get("/", async (req, res) => {
     try {
       const departments = await departmentModel.find(query);
       res.send({
-        success: true,
-        data: departments,
+        departments,
       });
     } catch (error) {
       res.status(500).send({
@@ -131,8 +125,8 @@ router.get("/:id", async (req, res) => {
         });
       } else {
         res.send({
-          success: true,
-          data: department,
+        
+         department,
         });
       }
     } catch (error) {
@@ -149,10 +143,9 @@ router.get("/:id", async (req, res) => {
   
     try {
       const departments = await departmentModel.find({ firm_type: firmType });
-      res.send({
-        success: true,
-        data: departments,
-      });
+      res.send(
+        departments
+      );
     } catch (error) {
       res.status(500).send({
         success: false,
