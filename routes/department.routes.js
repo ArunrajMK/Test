@@ -63,9 +63,35 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const data = await departmentModel.find();
-  res.send(data);
-});
+    const { firm_name, firm_type, location } = req.query;
+    let query = {};
+  
+    if (firm_name) {
+      query.firm_name = firm_name;
+    }
+  
+    if (firm_type) {
+      query.firm_type = firm_type;
+    }
+  
+    if (location) {
+      query.location = location;
+    }
+  
+    try {
+      const departments = await departmentModel.find(query);
+      res.send({
+        success: true,
+        data: departments,
+      });
+    } catch (error) {
+      res.status(500).send({
+        success: false,
+        message: "Internal Server Error",
+      });
+    }
+  });
+
 
 router.delete("/:id", async (req, res) => {
   const departmentId = req.params.id;
@@ -133,6 +159,7 @@ router.get("/:id", async (req, res) => {
         message: "Internal Server Error",
       });
     }
+    
   });
 
 module.exports = router;
