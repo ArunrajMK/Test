@@ -2,7 +2,16 @@ const mongoose = require('mongoose');
 const departmentSchema = new mongoose.Schema({
     firm_name: { type: String, required: true },
     firm_type: { type: String, required: true },
-    location: { type: String, required: true },
+    // location: { type: String, required: true },
+    location:{
+        street: { type: String, required: true },
+        city: { type: String, required: true },
+        state: { type: String, required: true },
+        postalCode: { type: String, required: true },
+        country: { type: String, required: true },
+        latitude: { type: String, required: true },
+        longitude: { type: String, required: true }
+    },
     employee_count: { type: String, required: true },
     resque_vehicle: { type: String, required: true },
     timings: { type: String, required: true },

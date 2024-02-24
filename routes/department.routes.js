@@ -23,7 +23,15 @@ router.post("/", async (req, res) => {
   const new_department = new departmentModel({
     firm_name: firm_name,
     firm_type:firm_type,
-    location:location,
+    location:{
+        street: location.street,
+        city: location.city,
+        state: location.state,
+        postalCode: location.postalCode,
+        country: location.country,
+        latitude: location.latitude,
+        longitude: location.longitude
+    },
     employee_count: employee_count,
     resque_vehicle: resque_vehicle,
     timings:timings,
@@ -39,7 +47,6 @@ router.post("/", async (req, res) => {
         licence_image_url:proof.licence_image_url,
         licence_image_id:proof.licence_image_id
     }
-
   });
 
   const result = await departmentModel.findOne({ firm_name });
@@ -69,8 +76,11 @@ router.get("/", async (req, res) => {
       query.firm_type = firm_type;
     }
   
-    if (location) {
-      query.location = location;
+    if (location.state||location.city||location.street||location.country) {
+      query.location = location.state;
+      query.location = location.city
+      query.location = location.street
+      query.location = location.country
     }
   
     try {
