@@ -21,10 +21,10 @@ app.use(express.json());
 app.use("/signup", signupRoutes);
 app.use("/signin", signinRoutes);
 app.use("/department", departmentRoutes);
-app.use("/asset", assetRoutes);
-app.use("/service", serviceRoutes);
-app.use("/incident", incidentRoutes);
-app.use("/", homeRoutes);
+// app.use("/asset", assetRoutes);
+// app.use("/service", serviceRoutes);
+// app.use("/incident", incidentRoutes);
+// app.use("/", homeRoutes);
 
 app.listen(PORT,async()=>{
 console.log("Listining to port 8080")
