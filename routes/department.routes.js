@@ -76,13 +76,21 @@ router.get("/", async (req, res) => {
       query.firm_type = firm_type;
     }
   
-    if (location.state||location.city||location.street||location.country) {
-      query.location = location.state;
-      query.location = location.city
-      query.location = location.street
-      query.location = location.country
+    if (location) {
+        query.location = {};
+        if (location.state) {
+          query.location.state = location.state;
+        }
+        if (location.city) {
+          query.location.city = location.city;
+        }
+        if (location.street) {
+          query.location.street = location.street;
+        }
+        if (location.country) {
+          query.location.country = location.country;
+        }
     }
-  
     try {
       const departments = await departmentModel.find(query);
       res.send({
